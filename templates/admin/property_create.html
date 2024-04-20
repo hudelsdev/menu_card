@@ -1,0 +1,242 @@
+{% load static %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Hotel Register</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="{% static 'fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' }">
+
+<link rel="stylesheet" href="{% static 'assets/css/register/style.css' %}">
+<meta name="robots" content="noindex, follow">
+<script nonce="3a75fb1c-3bd1-4943-9b70-a448ba33f1af">try{(function(w,d){!function(k,l,m,n){k[m]=k[m]||{};k[m].executed=[];k.zaraz={deferred:[],listeners:[]};k.zaraz.q=[];k.zaraz._f=function(o){return async function(){var p=Array.prototype.slice.call(arguments);k.zaraz.q.push({m:o,a:p})}};for(const q of["track","set","debug"])k.zaraz[q]=k.zaraz._f(q);k.zaraz.init=()=>{var r=l.getElementsByTagName(n)[0],s=l.createElement(n),t=l.getElementsByTagName("title")[0];t&&(k[m].t=l.getElementsByTagName("title")[0].text);k[m].x=Math.random();k[m].w=k.screen.width;k[m].h=k.screen.height;k[m].j=k.innerHeight;k[m].e=k.innerWidth;k[m].l=k.location.href;k[m].r=l.referrer;k[m].k=k.screen.colorDepth;k[m].n=l.characterSet;k[m].o=(new Date).getTimezoneOffset();if(k.dataLayer)for(const x of Object.entries(Object.entries(dataLayer).reduce(((y,z)=>({...y[1],...z[1]})),{})))zaraz.set(x[0],x[1],{scope:"page"});k[m].q=[];for(;k.zaraz.q.length;){const A=k.zaraz.q.shift();k[m].q.push(A)}s.defer=!0;for(const B of[localStorage,sessionStorage])Object.keys(B||{}).filter((D=>D.startsWith("_zaraz_"))).forEach((C=>{try{k[m]["z_"+C.slice(7)]=JSON.parse(B.getItem(C))}catch{k[m]["z_"+C.slice(7)]=B.getItem(C)}}));s.referrerPolicy="origin";s.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(k[m])));r.parentNode.insertBefore(s,r)};["complete","interactive"].includes(l.readyState)?zaraz.init():k.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document)}catch(e){throw fetch("/cdn-cgi/zaraz/t"),e;};</script></head>
+<body>
+<div class="wrapper" style="background-image: url('/static/assets/images/bg-registration-form-3.jpg');">
+<div class="inner">
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<h3>Register</h3>
+<div class="form-group">
+<div class="form-wrapper">
+<label for>Property Name :</label>
+<div class="form-holder">
+<i class="zmdi zmdi-account-o"></i>
+<input type="text" class="form-control" name="property_name" id="property_name" required>
+</div>
+</div>
+<div class="form-wrapper">
+<label for>Owner Name:</label>
+<div class="form-holder">
+<i style="font-style: normal; font-size: 15px;">@</i>
+<input type="text" class="form-control" name="owner_name" id="owner_name" required>
+</div>
+</div>
+</div>
+<div class="form-group">
+<div class="form-wrapper">
+<label for>Username:</label>
+<div class="form-holder">
+<i class="zmdi zmdi-lock-outline"></i>
+<input type="text" class="form-control" name="username" id="username" placeholder="" aria-required="true">
+</div>
+</div>
+<div class="form-wrapper">
+<label for>Password:</label>
+<div class="form-holder">
+<i class="zmdi zmdi-lock-outline"></i>
+<input type="password" class="form-control" name="password" id="password" placeholder="" aria-required="true">
+</div>
+</div>
+<div class="form-wrapper">
+<label for>Repeat Password:</label>
+<div class="form-holder">
+<i class="zmdi zmdi-lock-outline"></i>
+<input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="" aria-required="true">
+</div>
+</div>
+</div>
+<div class="form-group">
+<div class="form-wrapper">
+<label for>Email:</label>
+<div class="form-holder">
+<i class="zmdi zmdi-lock-outline"></i>
+<input type="email" class="form-control" name="email" id="email" placeholder="" required>
+</div>
+</div>
+<div class="form-wrapper">
+<label for>Mobile:</label>
+<div class="form-holder">
+<i class="zmdi zmdi-lock-outline"></i>
+<input type="number" class="form-control" name="mobile" id="mobile" placeholder="" required>
+</div>
+</div>
+<div class="form-wrapper">
+<label for>Logo:</label>
+<div class="form-holder">
+<i class="zmdi zmdi-lock-outline"></i>
+<input type="file" class="form-control-file" name="logo" id="logo">
+</div>
+</div>
+</div>
+<div class="form-group">
+<div class="form-wrapper">
+<label for>Address:</label>
+<div class="form-holder">
+<i class="zmdi zmdi-lock-outline"></i>
+<input type="text" class="form-control" name="address" id="address" placeholder="" required>
+</div>
+</div>
+<div class="form-wrapper">
+<label for>City:</label>
+<div class="form-holder">
+<i class="zmdi zmdi-lock-outline"></i>
+<input type="text" class="form-control" name="city" id="city" placeholder="" required>
+</div>
+</div>
+<div class="form-wrapper">
+<label for>State:</label>
+<div class="form-holder">
+<i class="zmdi zmdi-lock-outline"></i>
+<input type="text" class="form-control" name="state" id="state" placeholder="" required>
+</div>
+</div>
+</div>
+<div class="form-group">
+<div class="form-wrapper">
+<label for>Sales Exceutive:</label>
+<div class="form-holder">
+<i class="zmdi zmdi-lock-outline"></i>
+<input type="text" class="form-control" name="sales_executive" id="sales_executive" placeholder="" required>
+</div>
+</div>
+<div class="form-wrapper">
+<label for>Amount:</label>
+<div class="form-holder">
+<i class="zmdi zmdi-lock-outline"></i>
+<input type="number" class="form-control" name="amount" id="amount" placeholder="" required>
+</div>
+</div>
+<div class="form-wrapper">
+<label for>Tax:</label>
+<div class="form-holder">
+<i class="zmdi zmdi-lock-outline"></i>
+<input type="text" class="form-control" name="tax" id="tax" placeholder="" required>
+</div>
+</div>
+</div>
+<div class="form-group">
+<div class="form-wrapper">
+<label for>Total Amount:</label>
+<div class="form-holder">
+<i class="zmdi zmdi-lock-outline"></i>
+<input type="number" class="form-control" name="total_amount" id="total_amount" placeholder="" required>
+</div>
+</div>
+<div class="form-wrapper">
+<label for>Duration:</label>
+<div class="form-holder">
+  <select class="form-control" id="id_duration" name="duration">
+            {% for choice in duration_choices %}
+                <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+            {% endfor %}
+        </select>
+</div>
+</div>
+<div class="form-wrapper">
+<label for>Website:</label>
+<div class="form-holder">
+<i class="zmdi zmdi-lock-outline"></i>
+<input type="url" class="form-control" name="website" id="website" placeholder="">
+</div>
+</div>
+<div class="form-wrapper">
+<label for>Agreement:</label>
+<div class="form-holder">
+<i class="zmdi zmdi-lock-outline"></i>
+<input type="file" class="form-control-file" name="agreement" id="agreement" placeholder="" required>
+</div>
+</div>
+</div>
+<div class="form-group">
+<div class="form-wrapper">
+<label for>QR Code:</label>
+<div class="form-holder">
+<i class="zmdi zmdi-lock-outline"></i>
+<input type="file" class="form-control-file" name="qr_code" id="qr_code" placeholder="" required>
+</div>
+</div>
+</div>
+
+<div class="form-group">
+        <label for="unique_url">Unique URL:</label>
+        <input type="text" class="form-control" id="unique_url" name="unique_url" readonly>
+        <button type="button" class="btn btn-primary mt-2" id="generate_url_btn">Generate URL</button>
+    </div>
+
+
+<div class="form-end">
+<div class="checkbox">
+<label>
+<input type="checkbox"> Remember me
+<span class="checkmark"></span>
+</label>
+</div>
+        {% if error %}
+        <p>{{ error }}</p>
+        {% endif %}
+        {% include 'messages.html' %}
+<div class="button-holder">
+<button type="submit" value="Register">Register</button> <br><br><br><br>
+
+</div>
+</div>
+</form>
+</div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Function to generate a random alphanumeric string
+    function generateRandomString(length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
+    // Function to generate a unique URL
+    function generateUniqueURL() {
+        var randomString = generateRandomString(10); // You can adjust the length as needed
+        var uniqueURL = "http://127.0.0.1:8000/" + randomString; // Modify the domain accordingly
+        return uniqueURL;
+    }
+
+    // Event listener for the "Generate URL" button
+    document.getElementById("generate_url_btn").addEventListener("click", function() {
+        var uniqueURLInput = document.getElementById("unique_url");
+        var generatedURL = generateUniqueURL();
+        uniqueURLInput.value = generatedURL;
+    });
+});
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317" integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA==" data-cf-beacon='{"rayId":"86be777b0dfff431","version":"2024.3.0","token":"cd0b4b3a733644fc843ef0b185f98241"}' crossorigin="anonymous"></script>
+</body>
+</html>
+{% endblock %}

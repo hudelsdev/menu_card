@@ -1,0 +1,282 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+        content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Admin-Pro lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Admin-Pro lite design, Admin-Pro lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+        content="Admin-Pro Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Hotel Admin</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/adminpro-lite/" />
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>    
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static '/assets/images/favicon.png' %}">
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static '/assets/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- This page CSS -->
+    <!-- chartist CSS -->
+    <link href="{% static '/assets/plugins/chartist-js/dist/chartist.min.css' %}" rel="stylesheet">
+    <link href="{% static '/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css' %}" rel="stylesheet">
+ 
+    <link href="{% static '/assets/plugins/c3-master/c3.min.css' %}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <!-- Dashboard 1 Page CSS -->
+    <link href="{% static 'css/pages/dashboard.css' %}" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="{% static 'css/colors/default-dark.css' %}" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<style>
+    
+    #sidebar {
+            width: 250px;
+            height: 100%;
+            position: fixed;
+            background-color: #333;
+            padding-top: 20px;
+        }
+
+        #sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #sidebar ul li {
+            padding: 8px;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        /* #content {
+            margin-left: 250px;
+            padding: 20px;
+        } */
+
+        h1 {
+            color: #333;
+        }
+        h2 a{
+            text-decoration: none !important;
+            color: black;
+
+        }
+
+        .card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            cursor: pointer;                                                                
+        }
+        .topbar .top-navbar .navbar-nav>.nav-item>.nav-link {
+    padding-left: 0px;
+    padding-right: 105px;
+    font-size: 17px;
+    line-height: 54px;
+}
+.logo-container {
+            position: fixed;
+            top: 20px; 
+            right: 20px; 
+            z-index: 9999; 
+        }
+
+        .logo {
+            width: 50px; 
+            height: 50px;
+            border-radius: 50%; 
+            border: 2px solid #fff; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+        }
+
+</style>
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">Hotel Admin {{request.user.username}}</p>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html"></a>
+                        <!-- Logo icon --><b>
+                            <img src="{% static '/assets/images/logo-icon.png' %}" alt="homepage" class="dark-logo" />
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                        <span>
+                            <img src="{% static '/assets/images/logo-text.png' %}" alt="homepage" class="dark-logo" />
+                        </span>
+                    </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav me-auto">
+                        <!-- This is  -->
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark"
+                                href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav my-lg-0">
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item hidden-xs-down search-box"> <a
+                                class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i
+                                    class="ti-search"></i></a>
+                            <form class="app-search">
+                                <input type="text" class="form-control" placeholder="Search & enter"> <a
+                                    class="srh-btn"><i class="ti-close"></i></a>
+                            </form>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- Profile -->
+                        <!-- ============================================================== -->
+                       <!-- Add this code where you want the dropdown in your navigation bar -->
+                       {% for property in properties %}
+                        <li class="nav-item dropdown">
+                            
+                            <a class="nav-link waves-effect waves-dark dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{{ property.logo.url }}" alt="User Logo" class="logo">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'admin_logout' %}">Logout</a>
+                            </div>
+                        </li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li> <a class="waves-effect waves-dark" href="{% url 'hotel_index' %}" aria-expanded="false"><i
+                                    class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="{% url 'category_list' %}" aria-expanded="false"><i
+                                    class="mdi mdi-account-check"></i><span class="hide-menu">Categories</span></a></li>
+                        <li> <a class="waves-effect waves-dark" href="{% url 'menu_list' %}" aria-expanded="false"><i
+                                    class="mdi mdi-table"></i><span class="hide-menu">Menu-Items</span></a></li>
+        </ul>
+                 
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            {% block content %}
+
+
+
+            {% endblock %}
+           
+            <!-- End Container fluid  -->
+          
+            <!-- footer -->
+           
+            <footer class="footer"> © 2023 Admin Pro<a href="https://www.wrappixel.com/"></a> </footer>
+            
+            <!-- End footer -->
+           
+        </div>
+       
+        <!-- End Page wrapper  -->
+       
+    </div>
+  
+    <!-- End Wrapper -->
+    
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="{% static '/assets/plugins/jquery/jquery.min.js' %}"></script>
+    <!-- Bootstrap popper Core JavaScript -->
+    <script src="{% static '/assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="{% static 'js/perfect-scrollbar.jquery.min.js' %}"></script>
+    <!--Wave Effects -->
+    <script src="{% static 'js/waves.js' %}"></script>
+    <!--Menu sidebar -->
+    <script src="{% static 'js/sidebarmenu.js' %}"></script>
+    <!--Custom JavaScript -->
+    <script src="{% static 'js/custom.min.js' %}"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <script src="{% static '/assets/plugins/chartist-js/dist/chartist.min.js' %}"></script>
+    <script src="{% static '/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js' %}"></script>
+    <!--c3 JavaScript -->
+    <script src="{% static '/assets/plugins/d3/d3.min.js' %}"></script>
+    <script src="{% static '/assets/plugins/c3-master/c3.min.js' %}"></script>
+    <!-- Chart JS -->
+    <script src="{% static 'js/dashboard.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+          $('.dropdown-toggle').dropdown();
+        });
+      </script>
+</body>
+
+</html>

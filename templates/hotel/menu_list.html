@@ -1,0 +1,284 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Event List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+    .page-wrapper {
+        margin-left: 140px;
+    }
+    .btn-success {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+    position: absolute;
+    right: 50px;
+    top: 55px;
+    }
+    .fix-header .page-wrapper {
+    padding-top: 35px;
+    }   
+    @media screen and (min-width: 768px) {
+.custom-pagination {
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 20px;
+}
+}
+@media screen and (min-width: 768px) {
+.pagination-button {
+padding: 5px 10px;
+margin: 0 5px;
+cursor: pointer;
+background-color: #007bff;
+color: white;
+border: none;
+border-radius: 5px;
+}
+}
+
+@media screen and (min-width: 768px) {
+.pagination-button:hover {
+background-color: #0056b3;
+}
+}
+
+@media screen and (min-width: 768px) {
+.pagination-button:disabled {
+background-color: #ccc;
+cursor: not-allowed;
+}
+}
+
+
+@media screen and (min-width: 768px) {
+.pagination-list {
+list-style: none;
+display: flex;
+margin: 0;
+padding: 0;
+}
+}
+
+@media screen and (min-width: 768px) {
+.pagination-list li {
+margin: 0;
+padding: 0;
+}
+}
+
+@media screen and (min-width: 768px) {
+.pagination-list li.active button {
+background-color: #040a2e !important;
+}
+}
+
+
+/*  */
+@media screen and (min-width: 768px) {
+.pagination-button {
+background-color: #007BFF;
+color: #fff;
+padding: 5px 15px;
+border: none;
+cursor: pointer;
+margin-bottom: 30px;
+}
+.pagination-button.active{
+    background-color: #020d19;
+    color: #fff;
+    border: 2px solid #007bff;
+}
+}
+@media screen and (min-width: 768px) {
+.pagination-button:disabled {
+background-color: #ccc; 
+color: #888;
+cursor: not-allowed;
+}
+}
+@media screen and (min-width: 768px) {
+.pagination-button:hover {
+background-color: #0056b3;
+}
+}
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="container-fluid">
+
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">Menu-Items</h3>
+                </div>
+            </div>
+            <a href="{% url 'menu_items_add' %}" class="btn btn-success">Add Menu</a>
+            <div class="row"> 
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Menu List</h4>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                            <th>Category</th>
+                                            <th>Image</th>
+                                            <th>Edit/Delete</th>
+                                            <th>Availability</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for menuitem in menuitems %}
+                                            <tr>    
+                                                <th scope="row">{{ forloop.counter }}</th>
+                                                <td>{{ menuitem.name }}</td>
+                                                <td>{{ menuitem.price }}</td>
+                                                <td>{{ menuitem.category }}</td>
+                                                <td>
+                                                    {% if menuitem.image %}
+                                                        <img src="{{ menuitem.image.url }}" alt="{{ menuitem.name }}" class="img-thumbnail" style="max-width: 100px; max-height: 100px;">
+                                                    {% else %}
+                                                        No image available
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    
+                                                    <a href="{% url 'menu_items_edit' pk=menuitem.pk %}" class="btn btn-primary btn-sm">Edit</a>
+                                                    <form method="post" action="{% url 'menu_items_delete' pk=menuitem.pk %}" style="display: inline;">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
+                                                </td>
+
+                                                <td>
+                                                    {% if menuitem.available %}
+                                                        <form method="post" action="{% url 'toggle_availability' pk=menuitem.pk %}">
+                                                            {% csrf_token %}
+                                                            <button type="submit" class="btn btn-warning btn-sm">Stock Over</button>
+                                                        </form>
+                                                    {% else %}
+                                                        <form method="post" action="{% url 'toggle_availability' pk=menuitem.pk %}">
+                                                            {% csrf_token %}
+                                                            <!-- <button type="submit" class="btn btn-success btn-sm">Available</button> -->
+                                                        </form>
+                                                    {% endif %}
+                                                </td>
+                                                
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <!-- Add a section to display finished menu items -->
+                             
+                                
+                                
+                                
+
+                                <div class="pagination">
+                                    <span class="step-links">
+                                        {% if menuitems.has_previous %}
+                                            <a href="?page=1" class="btn btn-primary btn-sm">&laquo; first</a>
+                                            <a href="?page={{ menuitems.previous_page_number }}" class="btn btn-primary btn-sm">previous</a>
+                                        {% endif %}
+                                
+                                        <span class="current">
+                                            Page {{ menuitems.number }} of {{ menuitems.paginator.num_pages }}.
+                                        </span>
+                                
+                                        {% if menuitems.has_next %}
+                                            <a href="?page={{ menuitems.next_page_number }}" class="btn btn-primary btn-sm">next</a>
+                                            <a href="?page={{ menuitems.paginator.num_pages }}" class="btn btn-primary btn-sm">last &raquo;</a>
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Finished Menu Items</h4>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Category</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for finished_menuitem in finished_menuitems %}
+                                        <tr>
+                                            <td>{{ finished_menuitem.name }}</td>
+                                            <td>{{ finished_menuitem.price }}</td>
+                                            <td>{{ finished_menuitem.category }}</td>
+                                            <td>
+                                            <form method="post" action="{% url 'toggle_availability' pk=finished_menuitem.pk %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-success btn-sm">Make Available</button>
+                                            </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+    <script>
+        function toggleAvailability(menuItemId) {
+            fetch(`/api/adminmenu-items/${menuItemId}/toggle-availability/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'  
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();  
+                } else {
+                    console.error('Failed to toggle availability');
+                }
+            })
+            .catch(error => console.error('Error toggling availability:', error));
+        }
+        </script>
+        
+</body>
+</html>
+
+{% endblock %}

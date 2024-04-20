@@ -1,0 +1,7 @@
+<h2>Delete Menu Item</h2>
+<p>Are you sure you want to delete the Item "{{ menuitem.name }}"?</p>
+<form method="post" action="{% url 'menu_items_delete' pk=menuitem.pk %}">
+  {% csrf_token %}
+  <button type="submit">Delete</button>
+</form>
+<a href="{% url 'hotel_index' %}">Cancel</a>

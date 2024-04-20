@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Add Menu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Add Menu-Items</h2>
+        <form method="post" enctype="multipart/form-data" action="{% url 'menu_items_add' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control-file" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select class="form-control" id="category" name="category" required>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div><br>
+            
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" class="form-control" name="price" step="0.01" required placeholder="Price">
+            </div>
+
+            <div class="form-group">
+                <label for="image">Image:</label>
+                <input type="file" class="form-control-file" name="image" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="available">Availability:</label>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="available" name="available">
+                    <label class="form-check-label" for="available">Available</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Menu-Items</button>
+        </form>
+        <br>
+        <a href="{% url 'hotel_index' %}" class="btn btn-secondary">Back to Home</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+
+        // JavaScript to fetch categories and populate dropdown
+
+document.addEventListener("DOMContentLoaded", function() {
+    fetchCategories();
+});
+
+function fetchCategories() {
+    fetch('http://127.0.0.1:8000/api/admincategories/')
+        .then(response => response.json())
+        .then(categories => {
+            const categorySelect = document.getElementById('category');
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.textContent = category.name;
+                categorySelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching categories:', error);
+        });
+}
+
+// JavaScript to handle form submission
+
+document.getElementById('menuForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    
+});
+
+    </script>
+</body>
+</html>
+
+{% endblock %}

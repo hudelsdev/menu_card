@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Edit Menu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Edit Menu</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group" id="currentImageContainer">
+                {% if menu_item.image %}
+                    <label>Current Image:</label>
+                    <img src="{{ menu_item.image.url }}" alt="Current Event Image" style="max-width: 300px;">
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="image">Image:</label>
+                <input type="file" class="form-control-file" name="image" id="image" accept="image/*" value="{{ menu_item.image }}">
+            </div>
+        
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" name="name" id="name" value="{{ menu_item.name }}">
+            </div>
+        
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                {% for category in categories %}
+                    {% if category.user == request.user %}
+                        <option value="{{ category.id }}" {% if category.id == menu_item.category.id %} selected {% endif %}>{{ category.name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <br> 
+        
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" value="{{ menu_item.price }}" step="0.01" required><br><br>
+        
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" name="description" id="description">{{ menu_item.description }}</textarea>
+            </div>
+        
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+
+        <br><br>
+        
+        <br>
+        <a href="{% url 'menu_list' %}" class="btn btn-secondary">Cancel</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+
+        // JavaScript to fetch categories and populate dropdown
+
+document.addEventListener("DOMContentLoaded", function() {
+    fetchCategories();
+});
+
+function fetchCategories() {
+    fetch('http://127.0.0.1:8000/api/admincategories/')
+        .then(response => response.json())
+        .then(categories => {
+            const categorySelect = document.getElementById('category');
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.textContent = category.name;
+                categorySelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching categories:', error);
+        });
+}
+
+// JavaScript to handle form submission
+
+document.getElementById('menuForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    
+});
+
+    </script>
+</body>
+</html>
+
+
+{% endblock %}

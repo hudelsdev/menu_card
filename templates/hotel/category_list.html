@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Project List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .page-wrapper {
+            margin-left: 140px;
+        }
+        .btn-success {
+        color: #fff;
+        background-color: #28a745;
+        border-color: #28a745;
+        position: absolute;
+        right: 50px;
+        top: 55px;
+        }
+        .fix-header .page-wrapper {
+        padding-top: 35px;
+        }
+        @media screen and (min-width: 768px) {
+.custom-pagination {
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 20px;
+}
+}
+@media screen and (min-width: 768px) {
+.pagination-button {
+padding: 5px 10px;
+margin: 0 5px;
+cursor: pointer;
+background-color: #007bff;
+color: white;
+border: none;
+border-radius: 5px;
+}
+}
+
+@media screen and (min-width: 768px) {
+.pagination-button:hover {
+background-color: #0056b3;
+}
+}
+
+@media screen and (min-width: 768px) {
+.pagination-button:disabled {
+background-color: #ccc;
+cursor: not-allowed;
+}
+}
+
+
+@media screen and (min-width: 768px) {
+.pagination-list {
+list-style: none;
+display: flex;
+margin: 0;
+padding: 0;
+}
+}
+
+@media screen and (min-width: 768px) {
+.pagination-list li {
+margin: 0;
+padding: 0;
+}
+}
+
+@media screen and (min-width: 768px) {
+.pagination-list li.active button {
+background-color: #040a2e !important;
+}
+}
+
+
+/*  */
+@media screen and (min-width: 768px) {
+.pagination-button {
+background-color: #007BFF;
+color: #fff;
+padding: 5px 15px;
+border: none;
+cursor: pointer;
+margin-bottom: 30px;
+}
+.pagination-button.active{
+    background-color: #020d19;
+    color: #fff;
+    border: 2px solid #007bff;
+}
+}
+@media screen and (min-width: 768px) {
+.pagination-button:disabled {
+background-color: #ccc; 
+color: #888;
+cursor: not-allowed;
+}
+}
+@media screen and (min-width: 768px) {
+.pagination-button:hover {
+background-color: #0056b3;
+}
+}
+    </style>
+</head>
+<body>
+
+    <div class="page-wrapper">
+        <div class="container-fluid">
+
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">Categories</h3>
+                </div>
+            </div>
+            <a href="{% url 'category_add' %}" class="btn btn-success">Add Category</a>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Category List</h4>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Category-Name</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for category in categories %}
+                                            <tr>
+                                                <th scope="row">{{ forloop.counter }}</th>
+                                                <td>{{ category.name }}</td>
+                                               
+                                                <td>
+                                                    <a href="{% url 'category_edit' pk=category.pk %}" class="btn btn-primary btn-sm">Edit</a>
+                                                    <form method="post" action="{% url 'category_delete' pk=category.pk %}" style="display: inline;">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                    </form>
+                                                    
+                                                    
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="pagination">
+                                    <span class="step-links">
+                                        {% if categories.has_previous %}
+                                            <a href="?page=1" class="btn btn-primary btn-sm">&laquo; first</a>
+                                            <a href="?page={{ categories.previous_page_number }}" class="btn btn-primary btn-sm">previous</a>
+                                        {% endif %}
+                                
+                                        <span class="current">
+                                            Page {{ categories.number }} of {{ categories.paginator.num_pages }}.
+                                        </span>
+                                
+                                        {% if categories.has_next %}
+                                            <a href="?page={{ categories.next_page_number }}" class="btn btn-primary btn-sm">next</a>
+                                            <a href="?page={{ categories.paginator.num_pages }}" class="btn btn-primary btn-sm">last &raquo;</a>
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+  
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        
+    </script>
+</body>
+</html>
+
+{% endblock %}

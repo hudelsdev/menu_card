@@ -1,0 +1,7 @@
+<h2>Delete Category</h2>
+<p>Are you sure you want to delete the Category "{{ category.name }}"?</p>
+<form method="post" action="{% url 'category_delete' pk=category.pk %}">
+  {% csrf_token %}
+  <button type="submit">Delete</button>
+</form>
+<a href="{% url 'hotel_index' %}">Cancel</a>
