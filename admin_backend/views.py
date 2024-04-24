@@ -8,8 +8,8 @@ from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-import qrcode
-from io import BytesIO
+from django.http import JsonResponse
+
 
 
 User = get_user_model()
@@ -99,14 +99,14 @@ def property_create(request):
                 password = request.POST.get('password')
                 confirm_password = request.POST.get('confirm_password')
                 
-                # Checking the passwords match
                 if password != confirm_password:
                     messages.error(request, "Passwords do not match.")
                     return redirect('property_create')
                 
                 user = User.objects.create_user(username=username, password=password)
- 
-                # Creatin HotelUsers instance
+                
+                
+
                 hotel_user = user.hotels.create(
                     property_name=property_name,
                     owner_name=owner_name,
@@ -123,10 +123,17 @@ def property_create(request):
                     duration=duration,
                     website=website,
                     agreement=agreement,
-                    qr_code=qr_code
+                    qr_code=qr_code,
                 )
+                
+                 # Generate unique URL based on user ID and username
+                 
+                unique_url = f"https://127.0.0.1/hotel/{hotel_user.id}-{username.lower().replace(' ', '-')}"
+                hotel_user.unique_url = unique_url
+                hotel_user.save()   
 
-                messages.success(request, "Property created successfully.")
+                messages.success(request, f"Property created successfully. Unique URL: {unique_url}")
+                print(reverse('admin_home'))
                 return HttpResponseRedirect(reverse('admin_home'))
             except IntegrityError as e:
                 if 'unique constraint' in str(e) and 'username' in str(e):
@@ -135,9 +142,11 @@ def property_create(request):
                     messages.error(request, "Failed to create property. Please ensure all fields are valid.")
         else:
             messages.error(request, "You don't have permission to create properties.")
-
+            
+      # Retrieve user_id here
+    user_id = request.user.id       
     duration_choices = Duration  
-    return render(request, 'admin/property_create.html', {'duration_choices': duration_choices})
+    return render(request, 'admin/property_create.html', {'duration_choices': duration_choices,'user_id': user_id})
 
 
 
@@ -217,3 +226,21 @@ def property_activate(request, pk):
         else:
             return HttpResponseForbidden("You don't have permission to activate this property.")
     return render(request, 'property_activate.html', {'property': property})
+
+
+
+
+# def generate_unique_url(request):
+#     if request.method == 'GET':
+#         username = request.GET.get('username')
+#         hotel_id = request.GET.get('hotel_id')  
+        
+#         if username and hotel_id:
+#             domain = request.get_host()
+#             unique_url = f"{domain}/{hotel_id}-{username}"
+            
+#             return HttpResponseRedirect(reverse('username') + f'?unique_url={unique_url}')
+#         else:
+#             return JsonResponse({'error': 'Username and hotel ID are required'}, status=400)
+#     else:
+#         return JsonResponse({'error': 'Invalid request method'}, status=405)

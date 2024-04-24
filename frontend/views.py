@@ -5,7 +5,7 @@ from admin_backend .models import HotelUsers
 # Create your views here.
 
 
-def menu_card(request):
+def menu_card(request, pk, username):
     hotel_identifier = request.user.id
     menu_items = MenuItem.objects.filter(user_id=hotel_identifier)
     categories = Category.objects.filter(user_id=hotel_identifier)

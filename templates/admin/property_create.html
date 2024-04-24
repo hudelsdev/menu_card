@@ -72,7 +72,7 @@
 <label for>Mobile:</label>
 <div class="form-holder">
 <i class="zmdi zmdi-lock-outline"></i>
-<input type="number" class="form-control" name="mobile" id="mobile" placeholder="" required>
+<input type="tel" class="form-control" name="mobile" id="mobile" placeholder="" required>
 </div>
 </div>
 <div class="form-wrapper">
@@ -125,7 +125,7 @@
 <label for>Tax:</label>
 <div class="form-holder">
 <i class="zmdi zmdi-lock-outline"></i>
-<input type="text" class="form-control" name="tax" id="tax" placeholder="" required>
+<input type="number" class="form-control" name="tax" id="tax" placeholder="" required>
 </div>
 </div>
 </div>
@@ -174,18 +174,18 @@
 
 <div class="form-group">
         <label for="unique_url">Unique URL:</label>
-        <input type="text" class="form-control" id="unique_url" name="unique_url" readonly>
-        <button type="button" class="btn btn-primary mt-2" id="generate_url_btn">Generate URL</button>
+        <div class="input-group">
+            <input type="hidden" id="user_id" name="user_id" value="{{ user_id }}">
+            <input type="text" class="form-control" id="unique_url" name="unique_url" readonly>
+            <button type="button" class="btn btn-primary" id="generate_url_btn">Generate URL</button>
+            <button type="button" class="btn btn-secondary" id="copy_url_btn">Copy URL</button>
+        </div>
     </div>
 
 
+
 <div class="form-end">
-<div class="checkbox">
-<label>
-<input type="checkbox"> Remember me
-<span class="checkmark"></span>
-</label>
-</div>
+
         {% if error %}
         <p>{{ error }}</p>
         {% endif %}
@@ -198,35 +198,35 @@
 </form>
 </div>
 </div>
-
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Function to generate a random alphanumeric string
-    function generateRandomString(length) {
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for (var i = 0; i < length; i++) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        return result;
-    }
-
-    // Function to generate a unique URL
-    function generateUniqueURL() {
-        var randomString = generateRandomString(10); // You can adjust the length as needed
-        var uniqueURL = "http://127.0.0.1:8000/" + randomString; // Modify the domain accordingly
-        return uniqueURL;
-    }
-
-    // Event listener for the "Generate URL" button
-    document.getElementById("generate_url_btn").addEventListener("click", function() {
+    document.addEventListener("DOMContentLoaded", function() {
         var uniqueURLInput = document.getElementById("unique_url");
-        var generatedURL = generateUniqueURL();
-        uniqueURLInput.value = generatedURL;
+        var generateURLBtn = document.getElementById("generate_url_btn");
+
+        if (generateURLBtn) {
+            generateURLBtn.addEventListener("click", function() {
+                var username = document.getElementById("username").value;
+                var user_id = document.getElementById("user_id").value;
+                var generatedURL = `http://127.0.0.1:8000/hotel/${user_id}-${username.toLowerCase().replace(/\s+/g, '-')}`;
+                uniqueURLInput.value = generatedURL;
+            });
+        }
+
+        var copyURLBtn = document.getElementById("copy_url_btn");
+
+        if (copyURLBtn) {
+            copyURLBtn.addEventListener("click", function() {
+                uniqueURLInput.select();
+                document.execCommand("copy");
+                alert("URL copied to clipboard!");
+            });
+        }
     });
-});
 </script>
+
+
+
+
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 <script>
