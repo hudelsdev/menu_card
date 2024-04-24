@@ -24,11 +24,12 @@ SECRET_KEY = 'django-insecure-t4(oyd&k13n-7jw@h=tyg$r8pi85js3-8ew8r@mnxc91+c+i^b
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
 
 
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost']
+ALLOWED_HOSTS = ['menucardscan.com', '127.0.0.1', 'localhost', "45.79.122.27",]
+CSRF_TRUSTED_ORIGINS = ["https://menucardscan.com"]
 
 
 # Application definition
