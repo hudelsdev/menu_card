@@ -91,14 +91,16 @@ WSGI_APPLICATION = 'menucard.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'DEMO_TEST',
-        'USER': 'postgres',
-        'PASSWORD':'admin',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'menucard_db',
+            'USER': 'zeus',
+            'PASSWORD': 'SocioConnects@2023',
+            'HOST': '192.46.208.240',
+            'PORT': '5432',
+            #'OPTIONS': {'sslmode': 'require'},
+            # os.getenv("DB_PASSWORD")
+        }
 }
 
 
@@ -136,10 +138,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [  
     BASE_DIR/'static'
 ]
+STATIC_ROOT = BASE_DIR/'static_root'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
