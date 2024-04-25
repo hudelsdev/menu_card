@@ -207,7 +207,7 @@
             generateURLBtn.addEventListener("click", function() {
                 var username = document.getElementById("username").value;
                 var user_id = document.getElementById("user_id").value;
-                var generatedURL = `http://127.0.0.1:8000/hotel/${user_id}-${username.toLowerCase().replace(/\s+/g, '-')}`;
+                var generatedURL = `https://menucardscan.com/hotel/${user_id}-${username.toLowerCase().replace(/\s+/g, '-')}`;
                 uniqueURLInput.value = generatedURL;
             });
         }
@@ -223,6 +223,7 @@
         }
     });
 </script>
+
 
 
 
