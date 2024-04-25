@@ -1,16 +1,19 @@
 from django.shortcuts import render ,redirect
 from hotel.models import *
 from admin_backend .models import HotelUsers
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
 
 def menu_card(request, pk, username):
-    hotel_identifier = request.user.id
-    menu_items = MenuItem.objects.filter(user_id=hotel_identifier)
-    categories = Category.objects.filter(user_id=hotel_identifier)
-    properties = HotelUsers.objects.filter(user_id=hotel_identifier)
-    return render(request, 'frontend/menu_card.html', {'menu_items': menu_items, 'categories': categories,'properties':properties})
+    hotel_user = get_object_or_404(HotelUsers, id=pk)
+
+    menu_items = MenuItem.objects.filter(user_id=hotel_user.id)
+    categories = Category.objects.filter(user_id=hotel_user.id)
+    properties = Category.objects.filter(user_id=hotel_user.id)
+    
+    return render(request, 'frontend/menu_card.html', {'menu_items': menu_items, 'categories': categories, 'hotel_user': hotel_user,'properties':properties})
 
 
 
