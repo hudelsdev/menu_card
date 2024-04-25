@@ -128,7 +128,7 @@ def property_create(request):
                 
                  # Generate unique URL based on user ID and username
                  
-                unique_url = f"https://127.0.0.1/hotel/{hotel_user.id}-{username.lower().replace(' ', '-')}"
+                unique_url = f"https://menucardscan.com/hotel/{hotel_user.id}-{username.lower().replace(' ', '-')}"
                 hotel_user.unique_url = unique_url
                 hotel_user.save()   
 
