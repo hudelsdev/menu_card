@@ -6,7 +6,7 @@ from admin_backend .models import HotelUsers
 
 
 def menu_card(request, pk, username):
-    hotel_identifier = request.user.id(pk=pk)
+    hotel_identifier = request.user.id
     menu_items = MenuItem.objects.filter(user_id=hotel_identifier)
     categories = Category.objects.filter(user_id=hotel_identifier)
     properties = HotelUsers.objects.filter(user_id=hotel_identifier)
