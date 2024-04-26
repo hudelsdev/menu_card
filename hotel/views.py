@@ -37,7 +37,6 @@ def logout_view(request):
 
 
 
-@login_required
 def hotel_index(request):
     if request.user.is_hotel:
         categories = Category.objects.filter(user=request.user)
@@ -51,7 +50,7 @@ def hotel_index(request):
     
 # category & menu list
 
-@login_required
+
 def category_list(request):
 
     if request.user.is_hotel:
@@ -70,7 +69,7 @@ def category_list(request):
     else:
         return redirect('admin_login')
 
-@login_required
+
 def menu_list(request):
     if request.user.is_hotel:
         # Filter available menu items
