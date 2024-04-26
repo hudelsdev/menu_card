@@ -144,7 +144,7 @@ def property_create(request):
             messages.error(request, "You don't have permission to create properties.")
             
       # Retrieve user_id here
-    user_id = request.user.id       
+    user_id = pk       
     duration_choices = Duration  
     return render(request, 'admin/property_create.html', {'duration_choices': duration_choices,'user_id': user_id})
 
