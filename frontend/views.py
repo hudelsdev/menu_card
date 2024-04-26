@@ -1,11 +1,11 @@
 from django.shortcuts import render ,redirect
 from hotel.models import *
 from admin_backend .models import HotelUsers
-from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-
+@login_required
 def menu_card(request, pk, username):
     hotel_identifier = request.user.id
     menu_items = MenuItem.objects.filter(user_id=hotel_identifier)
