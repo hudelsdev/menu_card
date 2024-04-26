@@ -6,9 +6,10 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def menu_card(request, pk, username):
-    menu_items = MenuItem.objects.filter(user_id=pk)
-    categories = Category.objects.filter(user_id=pk)
-    properties = HotelUsers.objects.filter(user_id=pk)
+    hotel_identifier = pk
+    menu_items = MenuItem.objects.filter(user_id=hotel_identifier)
+    categories = Category.objects.filter(user_id=hotel_identifier)
+    properties = HotelUsers.objects.filter(user_id=hotel_identifier)
     return render(request, 'frontend/menu_card.html', {'menu_items': menu_items, 'categories': categories,'properties':properties})
 
 
