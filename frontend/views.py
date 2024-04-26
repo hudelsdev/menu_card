@@ -8,15 +8,21 @@ from django.shortcuts import get_object_or_404
 # Create your views here.
 
 def menu_card(request, pk, username):
-    # Retrieve hotel user based on the username in the URL
-    hotel_user = get_object_or_404(HotelUsers, pk=pk)
+    # Retrieve the hotel user (DeveloperAdmin) using the provided pk
+    hotel_user = get_object_or_404(DeveloperAdmin, pk=pk)
 
-    # Filter menu items and categories for the specific hotel
-    menu_items = MenuItem.objects.filter(user_id=hotel_user.id)
-    categories = Category.objects.filter(user_id=hotel_user.id)
-    
-    # Pass the retrieved data to the template
-    return render(request, 'frontend/menu_card.html', {'menu_items': menu_items, 'categories': categories, 'hotel_user': hotel_user})
+    # Filter categories and menu items associated with the hotel user
+    categories = Category.objects.filter(user=hotel_user)
+    menu_items = MenuItem.objects.filter(user=hotel_user)
+
+    # Pass the categories and menu items to the template
+    context = {
+        'categories': categories,
+        'menu_items': menu_items,
+        'hotel_user': hotel_user  
+    }
+
+    return render(request, 'frontend/menu_card.html', context)
 
 
 
