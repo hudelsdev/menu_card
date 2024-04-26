@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 
 def menu_card(request, pk, username):
     # Retrieve hotel user based on the username in the URL
-    hotel_user = get_object_or_404(HotelUsers, username=username)
+    hotel_user = get_object_or_404(HotelUsers, pk=pk)
 
     # Filter menu items and categories for the specific hotel
     menu_items = MenuItem.objects.filter(user_id=hotel_user.id)
