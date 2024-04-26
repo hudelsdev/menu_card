@@ -2,14 +2,21 @@ from django.shortcuts import render ,redirect
 from hotel.models import *
 from admin_backend .models import HotelUsers
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+
 
 # Create your views here.
 
 def menu_card(request, pk, username):
-    menu_items = MenuItem.objects.all()  # Retrieve all menu items
-    categories = Category.objects.all()  # Retrieve all categories
-    properties = HotelUsers.objects.all()  # Retrieve all hotel properties
-    return render(request, 'frontend/menu_card.html', {'menu_items': menu_items, 'categories': categories, 'properties': properties})
+    # Retrieve hotel user based on the username in the URL
+    hotel_user = get_object_or_404(HotelUsers, username=username)
+
+    # Filter menu items and categories for the specific hotel
+    menu_items = MenuItem.objects.filter(user_id=hotel_user.id)
+    categories = Category.objects.filter(user_id=hotel_user.id)
+    
+    # Pass the retrieved data to the template
+    return render(request, 'frontend/menu_card.html', {'menu_items': menu_items, 'categories': categories, 'hotel_user': hotel_user})
 
 
 
