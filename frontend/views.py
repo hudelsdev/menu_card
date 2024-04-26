@@ -2,8 +2,6 @@ from django.shortcuts import render ,redirect
 from hotel.models import *
 from admin_backend .models import HotelUsers
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
-from accounts .model import DeveloperAdmin 
 
 # Create your views here.
 
