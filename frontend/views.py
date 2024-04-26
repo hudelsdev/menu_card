@@ -7,18 +7,11 @@ from django.shortcuts import get_object_or_404
 
 
 def menu_card(request, pk, username):
-    # Retrieve the HotelUsers object based on pk and username
-    hotel_user = get_object_or_404(HotelUsers, id=pk, username=username)
-    
-    # Retrieve menu items and categories associated with the hotel_user
-    menu_items = MenuItem.objects.filter(user_id=hotel_user.id)
-    categories = Category.objects.filter(user_id=hotel_user.id)
-    
-    # Pass the retrieved items to the template
-    return render(request, 'frontend/menu_card.html', {
-        'menu_items': menu_items,
-        'categories': categories,
-        'hotel_user': hotel_user  # Optionally pass the hotel_user object to the template
+    hotel_identifier = request.user.id
+    menu_items = MenuItem.objects.filter(user_id=hotel_identifier)
+    categories = Category.objects.filter(user_id=hotel_identifier)
+    properties = HotelUsers.objects.filter(user_id=hotel_identifier)
+    return render(request, 'frontend/menu_card.html', {'menu_items': menu_items, 'categories': categories,'properties':properties})
 
 
 
