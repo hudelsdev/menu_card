@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-@login_required
 def menu_card(request, pk, username):
     hotel_identifier = request.user.id
     menu_items = MenuItem.objects.filter(user_id=hotel_identifier)
