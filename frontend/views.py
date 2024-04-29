@@ -6,11 +6,16 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def menu_card(request, pk, username):
-    hotel_identifier = request.user.id
-    menu_items = MenuItem.objects.filter(user_id=hotel_identifier)
-    categories = Category.objects.filter(user_id=hotel_identifier)
-    properties = HotelUsers.objects.filter(user_id=hotel_identifier)
-    return render(request, 'frontend/menu_card.html', {'menu_items': menu_items, 'categories': categories,'properties':properties})
+    try:
+        hotel = HotelUsers.objects.get(pk=pk, username=username)
+    except HotelUsers.DoesNotExist:
+        return render(request, '404.html', {'message': 'Hotel not found'})
+
+    menu_items = MenuItem.objects.filter(user=hotel)
+    categories = Category.objects.filter(user=hotel)
+    properties = HotelUsers.objects.filter(pk=hotel.pk)  
+
+    return render(request, 'frontend/menu_card.html', {'menu_items': menu_items, 'categories': categories,'properties': properties})
 
 
 
