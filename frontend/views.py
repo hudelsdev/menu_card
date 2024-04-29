@@ -5,12 +5,12 @@ from admin_backend .models import HotelUsers
 # Create your views here.
 
 
-def menu_card(request, pk, username):
-    hotel_identifier = request.user.id
-    menu_items = MenuItem.objects.filter(user_id=hotel_identifier)
-    categories = Category.objects.filter(user_id=hotel_identifier)
-    properties = HotelUsers.objects.filter(user_id=hotel_identifier)
+def menu_card(request, user_id):
+    menu_items = MenuItem.objects.filter(user=user_id)
+    categories = Category.objects.filter(user=user_id)
+    properties = HotelUsers.objects.filter(user_id=user_id)
     return render(request, 'frontend/menu_card.html', {'menu_items': menu_items, 'categories': categories,'properties':properties})
+
 
 
 
