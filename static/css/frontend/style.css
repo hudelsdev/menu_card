@@ -191,6 +191,7 @@ p {
 #fh5co-home {
   min-height: 700px;
   background: #fff url(../images/loader.gif) no-repeat center center;
+  margin-top: -520px;
 }
 #fh5co-home .flexslider {
   border: none;
@@ -203,7 +204,7 @@ p {
   z-index: 3;
   width: 100%;
   top: 50%;
-  margin-top: -212px;
+  margin-top: 200px !important;
   text-align: center;
 }
 #fh5co-home .flexslider .fh5co-text h1 {
