@@ -95,9 +95,11 @@
 				<div class="fh5co-overlay"></div>
 				<div class="fh5co-text">
 					<div class="container">
+						{% for property in properties %}
 						<div class="row">
-							<h1 class="to-animate">MenuCard</h1>
+							<h1 class="to-animate">{{ property.property_name }} <br> MenuCard</h1>
 						</div>
+						{% endfor %}
 					</div>
 				</div>
 			  	<ul class="slides">
