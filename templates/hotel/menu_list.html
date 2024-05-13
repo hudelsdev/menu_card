@@ -112,6 +112,12 @@ background-color: #0056b3;
     </style>
 </head>
 <body>
+      <div class="category_search">
+        <form method="GET" action="{% url 'category_list' %}" class="app-search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
     <div class="page-wrapper">
         <div class="container-fluid">
 
