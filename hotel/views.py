@@ -52,9 +52,18 @@ def hotel_index(request):
 
 
 def category_list(request):
-
     if request.user.is_hotel:
-        categories = Category.objects.filter(user=request.user)
+        # Filter categories
+        search_query = request.GET.get('q')
+        if search_query :
+            categories = Category.objects.filter(
+                Q(name__icontains=search_query ),
+                user=request.user
+            )
+        else:
+            categories = Category.objects.filter(user=request.user)
+        
+        # Pagination for categories
         page = request.GET.get('page', 1)
         paginator = Paginator(categories, 5)
 
