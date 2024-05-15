@@ -27,7 +27,7 @@ a:hover, a:focus, a:active {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display", serif;
+  font-family: 'circular';
   color: #000;
 }
 
@@ -800,7 +800,6 @@ p {
 }
 #fh5co-menus .fh5co-food-menu h2 {
   margin-bottom: 50px;
-  font-style: italic;
   position: relative;
 }
 #fh5co-menus .fh5co-food-menu h2.fh5co-drinks {
