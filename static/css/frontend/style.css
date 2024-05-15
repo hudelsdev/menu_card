@@ -33,6 +33,7 @@ body.fh5co-overflow {
   transition: all .5s ease;
   border-bottom-right-radius: 50px;
   border-top-right-radius: 25px;
+  top: 0;
 }
 .sidebar header {
   font-size: 119%;
