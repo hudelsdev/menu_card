@@ -80,7 +80,22 @@
     </style>
 	</head>
 	<body>
+    <!-- navbar catagries -->
 
+    <input type="checkbox" id="check">
+    <label for="check">
+      <i class="fa fa-bars" id="btn"></i>
+    </label>
+    <div class="sidebar">
+    <header>Categories</header>
+    {% for category in categories %}
+	
+	<ul>
+     <li><a href="#{{ category.name }}">{{ category.name|title }}</a></li>
+    </ul>
+	{% endfor %}
+   </div>
+   <!-- navbar catagries -->
 		
 	<div id="fh5co-container">
 		{% for property in properties %}
@@ -263,7 +278,7 @@
 							<ul>
 								{% for menu_item in category.menuitem_set.all %}
 								<li>
-									<div class="fh5co-food-desc">
+									<div id="{{category.name}}" class="fh5co-food-desc">
 										<figure>
 											{% if menu_item.image %}
 											<img src="{{ menu_item.image.url }}" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
@@ -586,7 +601,31 @@
 
 
 	
+		<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			const categoryList = document.querySelectorAll('.category');
+			const menuItemsList = document.querySelectorAll('.menu-item');
 	
+			menuItemsList.forEach(item => {
+				item.style.display = 'none';
+			});
+	
+			categoryList.forEach(category => {
+				category.addEventListener('click', function() {
+					const categoryId = this.getAttribute('data-category-id');
+	
+					menuItemsList.forEach(item => {
+						item.style.display = 'none';
+					});
+	
+					const filteredItems = document.querySelectorAll(`.menu-item[data-category-id="${categoryId}"]`);
+					filteredItems.forEach(item => {
+						item.style.display = 'block';
+					});
+				});
+			});
+		});
+	</script>
 	
 	
 	<!-- jQuery -->
