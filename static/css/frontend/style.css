@@ -38,7 +38,7 @@ p {
 .btn {
   margin-right: 4px;
   margin-bottom: 4px;
-  font-family: "Playfair Display", serif;
+  font-family: system-ui;
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -350,7 +350,6 @@ p {
 
 .fh5co-heading .heading {
   font-size: 50px;
-  font-style: italic;
   position: relative;
   padding-bottom: 30px;
   margin-bottom: 30px;
@@ -879,6 +878,7 @@ p {
   text-align: right;
   font-size: 20px;
   color: #fb6e14;
+  font-family: ui-monospace;
 }
 
 #fh5co-events {
@@ -989,7 +989,6 @@ p {
 }
 #fh5co-contact h3 {
   margin-bottom: 30px;
-  font-style: italic;
 }
 @media screen and (max-width: 768px) {
   #fh5co-contact {
@@ -1032,6 +1031,7 @@ p {
   margin: 0 0 1.5em 0;
   padding-left: 50px;
   list-style: none;
+  font-family: 'circular';
 }
 #fh5co-contact .fh5co-contact-info li i {
   position: absolute;
@@ -1042,6 +1042,15 @@ p {
 #fh5co-container {
   position: relative;
   z-index: 10;
+}
+
+a.js-gotop {
+    border: white;
+    background: white;
+    border-radius: 50px;
+    padding: 15px 15px;
+    font-weight: 900;
+    font-family: 'circular';
 }
 
 #fh5co-footer {
