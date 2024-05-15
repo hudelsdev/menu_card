@@ -34,6 +34,8 @@ body.fh5co-overflow {
   border-bottom-right-radius: 50px;
   border-top-right-radius: 25px;
   top: 0;
+  scroll-behavior: auto;
+  overflow-y: auto;
 }
 .sidebar header {
   font-size: 119%;
