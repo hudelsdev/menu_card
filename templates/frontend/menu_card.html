@@ -89,6 +89,7 @@
     <input type="checkbox" id="check">
     <label for="check">
       <i class="fa fa-bars" id="btn"></i>
+    <i class="fas fa-times" id="cancel"></i>	
     </label>
     <div class="sidebar">
     <header>Categories</header>
@@ -98,7 +99,8 @@
      <li><a href="#{{ category.name }}">{{ category.name|title }}</a></li>
     </ul>
 	{% endfor %}
-   </div>
+   </div>	
+<div id="overlay"></div>
    <!-- navbar catagries -->
 		
 	<div id="fh5co-container">
@@ -630,7 +632,13 @@
 			});
 		});
 	</script>
-	
+	<script>
+
+		document.getElementById('overlay').addEventListener('click', function() {
+		document.getElementById('check').checked =false;
+		});
+  
+	</script>
 	
 	<!-- jQuery -->
 	<script src="{% static 'js/jquery.min.js' %}"></script>
