@@ -37,6 +37,11 @@ body {
   border-bottom-right-radius: 50px;
   border-top-right-radius: 25px;
   top: 0;
+  overflow-y: auto;
+  scroll-behavior: auto;
+}
+
+
 }
 .sidebar header {
   font-size: 119%;
@@ -52,7 +57,7 @@ body {
     height: 100%;
     width: 100%;
     line-height: 50px;
-    font-size: 22px;
+    font-size: 15px;
     color: white;
     padding-left: 15px; 
     border-bottom: aliceblue;
