@@ -277,11 +277,13 @@
 					<div class="col-md-6">
 						<div class="fh5co-food-menu to-animate-2">
 							{% for category in categories %}
-							<h2 class="fh5co-drinks">{{ category.name }}</h2>
+							<div id="{{category.name}}">
+								<h2 class="fh5co-drinks">{{ category.name|title }}</h2>
+							</div>
 							<ul>
 								{% for menu_item in category.menuitem_set.all %}
 								<li>
-									<div id="{{category.name}}" class="fh5co-food-desc">
+									<div class="fh5co-food-desc">
 										<figure>
 											{% if menu_item.image %}
 											<img src="{{ menu_item.image.url }}" class="img-responsive" alt="Free HTML5 Templates by FREEHTML5.co">
